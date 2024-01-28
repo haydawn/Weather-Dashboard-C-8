@@ -73,7 +73,8 @@ $(document).ready(function () {
       var date = new Date(forecastItem.dt_txt);
 
       forecastDay.append("<p>Date: " + date.toLocaleDateString() + "</p>");
-      forecastDay.append("<p>Temperature: " + forecastItem.main.temp + " K</p>");
+      forecastDay.append("<p>Temp: " + forecastItem.main.temp + " K</p>");
+      forecastDay.append("<p>Wind: " + currentData.wind.speed + " m/s</p>");
       forecastDay.append("<p>Humidity: " + forecastItem.main.humidity + "%</p>");
 
       forecast.append(forecastDay);
