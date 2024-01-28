@@ -31,7 +31,7 @@ $(document).ready(function () {
 
   function getWeatherData(cityName) {
     var weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
-    var forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast"; // New URL for 5-day forecast
+    var forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast"; 
     var apiKey = "ef4de6bdfd15df375228f55a30731fc0";
 
     // Fetch current weather data
@@ -68,7 +68,7 @@ $(document).ready(function () {
     for (var i = 0; i < 5; i++) {
       var forecastDay = $("<div>").addClass("forecast-day");
 
-      // Get forecast information for each day
+      // Forecast information for each day
       var forecastItem = forecastData.list[i];
       var date = new Date(forecastItem.dt_txt);
 
