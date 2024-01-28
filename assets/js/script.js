@@ -19,56 +19,71 @@ function retrieveFromLocalStorage() {
 }
 
 $(document).ready(function () {
-    $("#search-form").submit(function (event) {
-      event.preventDefault();
-  
-      var cityName = $("#search-input").val().trim();
-      getWeatherData(cityName);
-  
-      $("#search-input").val("");
-      addToSearchHistory(cityName);
-    });
-  
-    function getWeatherData(cityName) {
-      var weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
-      var apiKey = "ef4de6bdfd15df375228f55a30731fc0";
-      var apiUrl = weatherApiUrl + "?q=" + cityName + "&appid=" + apiKey;
-  
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          displayWeatherData(data);
-        });
-    }
+  $("#search-form").submit(function (event) {
+    event.preventDefault();
 
-    function displayWeatherData(data) {
-      $("#today, #forecast").empty();
-  
-      // Display current weather
-      var currentWeather = $("<div>").addClass("current-weather");
-      currentWeather.append("<h2>" + data.name + "(" + new Date().toLocaleDateString()+ ")"+"</h2>");
-      currentWeather.append("<p>Temp: " + data.main.temp + " K</p>");
-      currentWeather.append("<p>Wind: " + data.wind.speed + " m/s</p>");
-      currentWeather.append("<p>Humidity: " + data.main.humidity + "%</p>");
-     
-    // Save to localStorage 
-      saveToLocalStorage(data.name, data.main.temp);
+    var cityName = $("#search-input").val().trim();
+    getWeatherData(cityName);
 
-      $("#today").append(currentWeather);
-  
-      // Display 5-day forecast
-      var forecast = $("<div>").addClass("forecast");
-  
-      for (var i = 1; i <= 5; i++) {
-        var forecastDay = $("<div>").addClass("forecast-day");
-        forecastDay.append("<p>Date: " + new Date().toLocaleDateString() + "</p>");
-        forecast.append(forecastDay);
-      }
-      $("#forecast").append(forecast);
-    }
-    
-    function addToSearchHistory(cityName) {
-      $("#history").append("<div>" + cityName + "</div>");
-    }
+    $("#search-input").val("");
+    addToSearchHistory(cityName);
   });
-  
+
+  function getWeatherData(cityName) {
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
+    var forecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast"; // New URL for 5-day forecast
+    var apiKey = "ef4de6bdfd15df375228f55a30731fc0";
+
+    // Fetch current weather data
+    fetch(weatherApiUrl + "?q=" + cityName + "&appid=" + apiKey)
+      .then(response => response.json())
+      .then(currentData => {
+        // Fetch 5-day forecast data
+        fetch(forecastApiUrl + "?q=" + cityName + "&appid=" + apiKey)
+          .then(response => response.json())
+          .then(forecastData => {
+            displayWeatherData(currentData, forecastData);
+          });
+      });
+  }
+
+  function displayWeatherData(currentData, forecastData) {
+    $("#today, #forecast").empty();
+
+    // Display current weather
+    var currentWeather = $("<div>").addClass("current-weather");
+    currentWeather.append("<h2>" + currentData.name + "(" + new Date().toLocaleDateString() + ")" + "</h2>");
+    currentWeather.append("<p>Temp: " + currentData.main.temp + " K</p>");
+    currentWeather.append("<p>Wind: " + currentData.wind.speed + " m/s</p>");
+    currentWeather.append("<p>Humidity: " + currentData.main.humidity + "%</p>");
+
+    // Save to localStorage
+    saveToLocalStorage(currentData.name, currentData.main.temp);
+
+    $("#today").append(currentWeather);
+
+    // Display 5-day forecast
+    var forecast = $("<div>").addClass("forecast");
+
+    for (var i = 0; i < 5; i++) {
+      var forecastDay = $("<div>").addClass("forecast-day");
+
+      // Get forecast information for each day
+      var forecastItem = forecastData.list[i];
+      var date = new Date(forecastItem.dt_txt);
+
+      forecastDay.append("<p>Date: " + date.toLocaleDateString() + "</p>");
+      forecastDay.append("<p>Temperature: " + forecastItem.main.temp + " K</p>");
+      forecastDay.append("<p>Humidity: " + forecastItem.main.humidity + "%</p>");
+
+      forecast.append(forecastDay);
+    }
+
+    $("#forecast").append("<h2>5-Day Forecast</h2>").append(forecast);
+  }
+
+  function addToSearchHistory(cityName) {
+    $("#history").append("<div>" + cityName + "</div>");
+  }
+});
+

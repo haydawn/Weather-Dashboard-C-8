@@ -25,6 +25,11 @@
 
 }
 
+.forecast {
+  background-color: rgb(48, 48, 66);
+  color: white;
+  padding: 5px;
+  }
 
 /* Responsive Styles */
 
