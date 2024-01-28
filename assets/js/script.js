@@ -72,7 +72,8 @@ $(document).ready(function () {
       var forecastItem = forecastData.list[i];
       var date = new Date(forecastItem.dt_txt);
 
-      forecastDay.append("<p>Date: " + date.toLocaleDateString() + "</p>");
+      forecastDay.append(date.toLocaleDateString());
+      forecastDay.append("<i class='fas fa-cloud'></i>");
       forecastDay.append("<p>Temp: " + forecastItem.main.temp + " K</p>");
       forecastDay.append("<p>Wind: " + currentData.wind.speed + " m/s</p>");
       forecastDay.append("<p>Humidity: " + forecastItem.main.humidity + "%</p>");
@@ -80,7 +81,7 @@ $(document).ready(function () {
       forecast.append(forecastDay);
     }
 
-    $("#forecast").append("<h2>5-Day Forecast</h2>").append(forecast);
+    $("#forecast").append("<h2>5-Day Forecast:</h2>").append(forecast);
   }
 
   function addToSearchHistory(cityName) {
