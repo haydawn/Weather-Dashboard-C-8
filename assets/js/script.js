@@ -1,3 +1,23 @@
+function saveToLocalStorage(cityName, temperature) {
+  var savedData = {
+    cityName: cityName,
+    temperature: temperature
+  };
+  localStorage.setItem("weatherData", JSON.stringify(savedData));
+}
+
+function retrieveFromLocalStorage() {
+  var savedDataString = localStorage.getItem("weatherData");
+  var savedData = JSON.parse(savedDataString);
+
+  if (savedData) {
+    console.log("City Name: " + savedData.cityName);
+    console.log("Temperature: " + savedData.temperature);
+  } else {
+    console.log("No saved data found");
+  }
+}
+
 $(document).ready(function () {
     $("#search-form").submit(function (event) {
       event.preventDefault();
@@ -22,7 +42,6 @@ $(document).ready(function () {
     }
 
     function displayWeatherData(data) {
-      // Clear previous data
       $("#today, #forecast").empty();
   
       // Display current weather
@@ -32,7 +51,9 @@ $(document).ready(function () {
       currentWeather.append("<p>Wind: " + data.wind.speed + " m/s</p>");
       currentWeather.append("<p>Humidity: " + data.main.humidity + "%</p>");
      
-  
+    // Save to localStorage 
+      saveToLocalStorage(data.name, data.main.temp);
+
       $("#today").append(currentWeather);
   
       // Display 5-day forecast
@@ -41,14 +62,11 @@ $(document).ready(function () {
       for (var i = 1; i <= 5; i++) {
         var forecastDay = $("<div>").addClass("forecast-day");
         forecastDay.append("<p>Date: " + new Date().toLocaleDateString() + "</p>");
-  
         forecast.append(forecastDay);
       }
-  
       $("#forecast").append(forecast);
     }
     
-  
     function addToSearchHistory(cityName) {
       $("#history").append("<div>" + cityName + "</div>");
     }
