@@ -16,20 +16,26 @@
   flex-direction: column; 
 }
 
+.form-input{
+  padding: 10px;
+}
+
 .weather-search {
   width: 100%;
   margin-bottom: 10px; 
-  
 }
 
 #search-button{
   background-color: rgba(7, 127, 197, 0.772);
+  width: 100% !important;
   text-align: center;
   color: white;
-  width: 100%;
   margin-top: 10px;
   padding: 5px;
+  display: block;
 }
+
+
 
 #history {
   text-align: center;
@@ -48,17 +54,21 @@
 /* Main Dashboard*/
 
 .col-lg-9 {
-  border: solid;
-  border-color: black;
   margin-top: 30px;
+}
+
+.current-weather {
+  border: 1px solid black; 
+  padding: 10px;
 }
 
 .forecast {
   color: white;
+  margin-top: 10px;
   padding: 5px;
   display: grid;
   grid-template-columns: repeat(5, 1fr); 
-  gap: 10px; 
+  gap: 20px; 
 }
 
 .forecast-day {
@@ -67,5 +77,6 @@
   padding: 10px;
 }
 
-
-
+.fas{
+  padding: 15px;
+}
