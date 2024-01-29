@@ -1,17 +1,46 @@
 
 /* Sidebar Styles */
-#history div {
-  background-color: rgb(177, 181, 181);
+
+.col-lg-3 {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#form-heading {
+  margin-bottom: 10px; 
+}
+
+.form-inline {
+  display: flex;
+  flex-direction: column; 
+}
+
+.weather-search {
+  width: 100%;
+  margin-bottom: 10px; 
+  
+}
+
+#search-button{
+  background-color: rgba(7, 127, 197, 0.772);
+  text-align: center;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+#history {
   text-align: center;
   font-size: 14px;
   padding: 5px;
   margin-bottom: 10px;
 }
 
-#search-button{
-  background-color: rgba(50, 76, 209, 0.772);
-  width: 100%;
-  margin-top: 10px;
+#history div {
+  background-color: rgb(177, 181, 181);
+  margin-bottom: 10px; 
   padding: 5px;
 }
 
@@ -33,19 +62,10 @@
 }
 
 .forecast-day {
-  background-color: rgb(48, 48, 66);
+  background-color: rgb(57, 57, 85);
   border: 1px solid white;
   padding: 10px;
 }
 
 
-/* Responsive Styles */
 
-@media (max-width: 992px) {
-  .col-lg-3 {
-    flex: 0 0 100%; 
-    max-width: 100%;
-    margin-bottom: 15px; 
-  }
-
-} 
