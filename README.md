@@ -38,16 +38,18 @@ When a user clicks on a city in the search history they are again presented with
 
   
   
-## Mock-Up
+## Starterdemo
 
 The following animation demonstrates the application functionality:
 
-![]()
-  
+![Starterdemo](assets/images/Starterdemo.png)
+
 
 ## Completed Dashbboard Screenshots
 
-![]()
+![](assets/images/Screenshot1.png)
+  
+![](assets/images/Screenshot2.png)
 
 
 
@@ -56,6 +58,7 @@ The following animation demonstrates the application functionality:
 [Javascript.info](https://javascript.info/)
 [W3Schools](https://www.w3schools.com/js/)
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+[Bootstrap](https://getbootstrap.com/)
 
 
 
